@@ -24,7 +24,7 @@
 #ifndef __ASSEMBLER__
 # include <time.h>
 # include <sys/param.h>
-# include <bits/pthreadtypes.h>
+# include "mypthreadtypes.h"
 //# include <kernel-features.h>
 //# include <tcb-offsets.h>
 
@@ -277,6 +277,8 @@ extern int __lll_timedlock_elision (int *futex, short *adapt_count,
 			   : "m" (futex), "S" (private)			      \
 			   : "ax", "cx", "r11", "cc", "memory");	      \
     })
+	 
+        //__asm__ __volatile__ (__lll_unlock_asm_start			      \
 
 #define lll_robust_unlock(futex, private) \
   do									      \
