@@ -70,7 +70,7 @@ public:
     std::string result = "";
     while (!feof(pipe)) {
         if (fgets(buffer, 128, pipe) != NULL){
-						//printf("%s", buffer); //TODO: remove this
+//						printf("%s", buffer); //TODO: remove this
             result += buffer;
 				}
     }
@@ -86,21 +86,9 @@ public:
       exit(1);
     }
     _curFilename[count] = '\0';
-	
 	}
 
   std::string get_call_stack_string( long *call_stack ){
-
-    //char _curFilename[MAXBUFSIZE];
-    //int count = readlink("/proc/self/exe", _curFilename, MAXBUFSIZE);
-    //if (count <= 0 || count >= MAXBUFSIZE)
-    //{
-    //  fprintf(stderr, "Failed to get current executable file name\n" );
-    //  exit(1);
-    //}
-    //_curFilename[count] = '\0';
-
-
 		
     char buf[MAXBUFSIZE];
     std::string stack_str="";
@@ -266,7 +254,6 @@ public:
 		int id = 0; //for debugging puporse, shoud match with total locks	
 
 		for(int i=0; i<total_sync_vars; i++) {
-
 			mutex_t *m = sync_vars.getEntry(i);
 			assert(m->entry_index == i);
 			
@@ -417,9 +404,9 @@ public:
 #ifdef GET_STATISTICS
 		std::cout<< "STATISTICS:\n";
 		std::cout<< "\ttotal Distinct Locks: " << id << std::endl;
-		std::cout<< "\ttatal Acquired Locks: " << totalLocks << std::endl;
-		std::cout<< "\ttatal Conflicts: " << totalConflicts << std::endl;
-		std::cout<< "\ttatal CondWaits: " << totalCondWaits << std::endl;
+		std::cout<< "\ttotal Acquired Locks: " << totalLocks << std::endl;
+		std::cout<< "\ttotal Conflicts: " << totalConflicts << std::endl;
+		std::cout<< "\ttotal CondWaits: " << totalCondWaits << std::endl;
 #endif
 		
 		//std::cout << total_threads << " threads, " << id <<  " mutexes\n";

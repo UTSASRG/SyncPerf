@@ -7,10 +7,9 @@
 #ifndef _XRUN_H
 #define _XRUN_H
 
+#include <signal.h>
 #include "xdefines.h"
-
 #include "xthread.h"
-
 #include "mutex_manager.h"
 
 

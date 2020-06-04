@@ -273,7 +273,8 @@ public:
 		}
 		else {
 			thread->parentRuntime=getParentRuntime(thread->pindex);
-			thread->pindex = getThreadIndex();
+			//thread->pindex = getThreadIndex();
+			thread->pindex = current->index;
 		}
 
 		global_unlock();
@@ -298,13 +299,11 @@ public:
     // Allocate a global thread index for current thread.
     tindex = allocThreadIndex();
     thread_t * children = getThreadInfoByIndex(tindex);
-    
+
     children->startRoutine = fn;
     children->startArg = arg;
 	
 		//children->entryStart = tindex * xdefines::MAX_ENTRIES_PER_THREAD;
-		
-		//printf("pthread create  index : %d, startime : %lf\n", tindex, children->startTime);
 		
     result =  WRAP(pthread_create)(tid, attr, startThread, (void *)children);
 		
@@ -344,13 +343,11 @@ public:
 	int thread_join(pthread_t thread, void **retval)  {
 		int ret;
 
-		
 		ret = WRAP(pthread_join(thread, retval));
-
 		if(ret == 0) {
 			thread_t * thisThread;
 
-			// Finding out the thread with this pthread_t 
+			// Finding out the thread with this pthread_t
 			//thisThread = getChildThreadStruct(thread);
 
 			markThreadExit(thisThread);
@@ -370,7 +367,7 @@ public:
 
 		setPrivateStackTop(false);
 
-//		fprintf(stderr, "CHILD:tid %d index %d\n", current->tid, current->index);
+		//printf("CHILD:tid %d index %d\n", current->tid, current->index);
     // from the TLS storage.
     result = current->startRoutine(current->startArg);
 

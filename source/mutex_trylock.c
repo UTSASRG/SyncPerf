@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include "pthreadP.h"
 #include <lowlevellock.h>
+#include "xdefines.h"
 
 
 
@@ -26,7 +27,8 @@ pthread_mutex_trylock (pthread_mutex_t *mutex) {
   __atomic_fetch_add(&totalLocks, 1, __ATOMIC_RELAXED);
 #endif
 #ifndef ORIGINAL
-	int tid = getThreadIndex();
+	//int tid = getThreadIndex();
+    int tid = current->index;
   if( !is_my_mutex(mutex) )
   {
 		mutex_t *new_mutex = create_mutex(mutex);

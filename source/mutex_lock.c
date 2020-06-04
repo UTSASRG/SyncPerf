@@ -12,15 +12,11 @@
 #include <pthread.h>
 //#include <kernel-features.h>
 #include <atomic.h>
-#include "pthreadP.h"
 #include <sysdep.h>
-
 #include<mutex_manager.h>
+#include "pthreadP.h"
 
-
-#ifndef NO_INCR
 #include "xdefines.h"
-#endif
 
 #ifndef LLL_MUTEX_LOCK
 # define LLL_MUTEX_LOCK(mutex) \
@@ -62,7 +58,8 @@ pthread_mutex_lock (pthread_mutex_t *mutex)
 	struct timeinfo wait_start;
 
 #ifndef ORIGINAL
-	int tid = getThreadIndex();
+	//int tid = getThreadIndex();
+    int tid = current->index;
 
 #ifndef NO_INCR // when not called for cond_lock
 	if( !is_my_mutex(mutex) ) 

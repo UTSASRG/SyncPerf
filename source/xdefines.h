@@ -111,10 +111,10 @@ extern "C"
     return current->tid;
   }
 
-  // Get thread index
-  inline int getThreadIndex(void) {
-    return current->index;
-  }
+//  // Get thread index
+//  inline int getThreadIndex(void) {
+//    return current->index;
+//  }
 	// Get thread stackTop
 	inline unsigned int getThreadStackTop(void) {
     return (unsigned int)current->stackTop;
